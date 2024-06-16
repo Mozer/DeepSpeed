@@ -209,9 +209,18 @@ else:
     git_branch = "unknown"
 
 if sys.platform == "win32":
-    shutil.copytree('.\\csrc', '.\\deepspeed\\ops')
-    shutil.copytree('.\\op_builder', '.\\deepspeed\\ops')
-    shutil.copytree('.\\accelerator', '.\\deepspeed\\accelerator')
+    try:
+        shutil.copytree('.\\csrc', '.\\deepspeed\\ops', dirs_exist_ok=True)
+    except:
+        print(".\\deepspeed\\ops exists")
+    try:
+        shutil.copytree('.\\op_builder', '.\\deepspeed\\ops', dirs_exist_ok=True)
+    except:
+        print(".\\deepspeed\\ops exists")
+    try:        
+        shutil.copytree('.\\accelerator', '.\\deepspeed\\accelerator', dirs_exist_ok=True)
+    except:
+        print(".\\deepspeed\\accelerator")
     egg_info.manifest_maker.template = 'MANIFEST_win.in'
 
 # Parse the DeepSpeed version string from version.txt.
